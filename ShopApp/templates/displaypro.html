@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-sm-12 col-xl-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">PRODUCT TABLE</h6>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">PRODUCT CATEGORY</th>
+                                        <th scope="col">PRODUCT NAME</th>
+                                        <th scope="col">QUANTITY</th>
+                                        <th scope="col">MRP</th>
+                                        <th scope="col">COUNTRY OF ORGIN</th>
+                                        <th scope="col">MANUFACTURED BY</th>
+                                        <th scope="col">DESCRIPTION</th>
+                                        <th scope="col">IMAGE 1</th>
+                                        <th scope="col">IMAGE 2</th>
+                                        <th scope="col">IMAGE 3</th>
+                                        <th scope="col">ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for i in pro %}
+                                    <tr>
+<!--                                        <th scope="row">1</th>-->
+                                        <td>{{i.Product_Category}}</td>
+                                        <td>{{i.Product_Name}}</td>
+                                        <td>{{i.Quantity}}</td>
+                                        <td>{{i.MRP}}</td>
+                                        <td>{{i.Country_Of_Orgin}}</td>
+                                        <td>{{i.Manufactured_By}}</td>
+                                        <td>{{i.Description}}</td>
+                                        <td>
+                                            <img src="{{i.Image1.url}}" width="90px"height="90px">
+                                        </td>
+                                        <td>
+                                            <img src="{{i.Image2.url}}" width="90px"height="90px">
+                                        </td>
+                                        <td>
+                                            <img src="{{i.Image3.url}}" width="90px"height="90px">
+                                        </td>
+                                        <td><a class="btn btn-sm btn-primary" href="{% url 'edit_pro' pro_id=i.id %}">Edit</a></td>
+                                        <td><a class="btn btn-sm btn-primary" href="{% url 'delete_pro' pro_id=i.id %}">Delete</a></td>
+                                    </tr>
+                                {% endfor %}
+<!--                                    <tr>-->
+<!--                                        <th scope="row">2</th>-->
+<!--                                        <td>Mark</td>-->
+<!--                                        <td>Otto</td>-->
+<!--                                        <td>mark@email.com</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <th scope="row">3</th>-->
+<!--                                        <td>Jacob</td>-->
+<!--                                        <td>Thornton</td>-->
+<!--                                        <td>jacob@email.com</td>-->
+<!--                                    </tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {% if messages %}
+        {% for i in messages %}
+            {% if i.tags == 'success' %}
+                <script>
+                    swal('{{i}}', '', 'success');
+                </script>
+            {% elif i.tags == 'error' %}
+                <script>
+                    swal('{{i}}', '', 'error');
+                </script>
+            {% elif i.tags == 'warning' %}
+                <script>
+                    swal('{{i}}', '', 'warning');
+                </script>
+            {% else %}
+                <script>
+                    swal('{{i}}', '', 'info');
+                </script>
+            {% endif %}
+        {% endfor%}
+    {% endif %}
+</body>
+</html>
+{% endblock %}

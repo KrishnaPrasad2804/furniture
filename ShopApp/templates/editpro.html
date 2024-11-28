@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<h1>hi</h1>-->
+<form method="post" action="{% url 'update_pro' pro_id=pro.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="col-sm-12 col-xl-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">EDIT PRODUCT ITEMS HERE...</h6>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" name="psel" id="floatingSelect" aria-label="Floating label select example">
+                                    <option selected="">{{pro.Product_Category}}</option>
+                                    {% for i in cat %}
+                                    <option>{{i.Name}}</option>
+                                    {% endfor %}
+                                </select>
+<!--                                <label for="floatingSelect">Select The Product</label>-->
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="pname" id="floatingInput" value="{{pro.Product_Name}}" placeholder="name">
+                                <label for="floatingInput">Product Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="qty" id="floatingInput" value="{{pro.Quantity}}" placeholder="qty">
+                                <label for="floatingInput">Quantity</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="amt" id="floatingInput" value="{{pro.MRP}}" placeholder="amt">
+                                <label for="floatingInput">MRP</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="coo" id="floatingInput" value="{{pro.Country_Of_Orgin}}" placeholder="country of orgin">
+                                <label for="floatingInput">Country Of Orgin</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="man" id="floatingInput" value="{{pro.Manufactured_By}}" placeholder="manufacture">
+                                <label for="floatingInput">Manufactured By</label>
+                            </div>
+                             <div class="form-floating">
+                                <textarea class="form-control" name="pdes" placeholder="description" id="floatingTextarea" style="height: 150px;">
+                                    {{pro.Description}}
+                                </textarea>
+                                <label for="floatingTextarea">Description</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="file" class="form-control" name="pimg" id="formFile" placeholder="img">
+                                <img src="{{pro.Image1.url}}" width="90px" height="90px">
+                                <label for="formFile">Image</label>
+                                <input type="file" class="form-control" name="pimag" id="formFile" placeholder="img">
+                                <img src="{{pro.Image2.url}}" width="90px" height="90px">
+                                <label for="formFile">Image</label>
+                                <input type="file" class="form-control" name="pimage" id="formFile" placeholder="img">
+                                <img src="{{pro.Image3.url}}" width="90px" height="90px">
+                                <label for="formFile">Image</label>
+                            </div>
+                            <div class="form-floating mb-3"><br>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+</form>
+</body>
+</html>
+{% endblock %}

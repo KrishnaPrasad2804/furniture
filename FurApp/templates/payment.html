@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Payment Page</title>
+    <style>
+        /* Apply a gradient background */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff6f61, #6a5acd, #00bcd4); /* Creative gradient background */
+            background-size: 300% 300%;
+            animation: gradientBG 10s ease infinite; /* Animated gradient */
+        }
+
+        /* Keyframe animation for gradient */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Form container */
+        .payment-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Input fields styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff6f61; /* Focus color */
+        }
+
+        /* Payment button styling */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #ff6f61; /* Button color */
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff4a38; /* Darker shade on hover */
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 480px) {
+            .payment-container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .btn {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+    </style>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_TkWBp5GMlK0tXv "
+    data-amount="{{payy_str}}"
+    data-currency="INR"
+    data-order_id="{{payment.order_id}}"
+    data-buttontext=""
+    data-name="Furniture"
+    data-description="Your description"
+    data-image=""
+    data-prefill.name="abc"
+    data-prefill.email="abc@gmail.com"
+    data-theme.color="#4badeb"
+ >
+
+</script>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Make a Payment</h2>
+        <form action="{% url 'paymentpg' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">{{customer.Name}}</label>
+                <input type="text" id="username" value="{{request.session.Name_up}}" name="username" required placeholder="Enter your username">
+            </div>
+            <button type="submit" class="btn">Pay Now</button>
+        </form>
+    </div>
+</body>
+</html>

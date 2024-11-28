@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<h1>hii</h1>-->
+<form method="post" action="{% url 'save_pro' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="col-sm-12 col-xl-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">PRODUCT</h6>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="floatingSelect" name="psel" aria-label="Floating label select example">
+                                    <option selected="">Select The Product Category</option>
+                                    {% for i in cat %}
+                                    <option>{{i.Name}}</option>
+                                    {% endfor %}
+                                </select>
+<!--                                <label for="floatingSelect">Select The Product Category</label>-->
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="pname" id="floatingInput" placeholder="name">
+                                <label for="floatingInput">Product Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="qty" id="floatingPassword" placeholder="Qty">
+                                <label for="floatingPassword">Quantity</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="amt" id="floatingPassword" placeholder="amt">
+                                <label for="floatingPassword">MRP</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="coo" id="floatingPassword" placeholder="country of orgin">
+                                <label for="floatingPassword">Country Of Orgin</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="man" id="floatingPassword" placeholder="Manufacture">
+                                <label for="floatingPassword">Manufactured By</label>
+                            </div>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="description" name="des" id="floatingTextarea" style="height: 150px;"></textarea>
+                                <label for="floatingTextarea">Description</label>
+                            </div>
+                            <div class="form-floating mb-3"><br>
+                                <input type="file" class="form-control" name="pimg" id="formFile" placeholder="img">
+                                <label for="formFile"></label>
+                                <input type="file" class="form-control" name="pimag" id="formFile" placeholder="img">
+                                <label for="formFile"></label>
+                                <input type="file" class="form-control" name="pimage" id="formFile" placeholder="img">
+                                <label for="formFile"></label>
+                            </div>
+                            <div class="form-floating mb-3"><br>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {% if messages %}
+        {% for i in messages %}
+            {% if i.tags == 'success' %}
+                <script>
+                    swal('{{i}}', '', 'success');
+                </script>
+            {% elif i.tags == 'error' %}
+                <script>
+                    swal('{{i}}', '', 'error');
+                </script>
+            {% elif i.tags == 'warning' %}
+                <script>
+                    swal('{{i}}', '', 'warning');
+                </script>
+            {% else %}
+                <script>
+                    swal('{{i}}', '', 'info');
+                </script>
+            {% endif %}
+        {% endfor%}
+    {% endif %}
+</form>
+</body>
+</html>
+{% endblock %}
